@@ -1,0 +1,22 @@
+div {
+	padding:5px;
+	margin:10px;
+	display:inline-block;
+	background:#ccc;
+	border:2px solid black;
+	
+}
+button {
+	font-size:var(--font-size);
+	font-family:var(--font-family);
+	color:var(--font-color);
+	margin-right:10px;
+	background:var(--col-bg);
+	border:2px solid black;
+}
+button:first-child {
+	margin-left:10px;
+}
+button:last-child {
+	margin-right:0;
+}

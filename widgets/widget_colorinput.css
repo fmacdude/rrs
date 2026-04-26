@@ -1,0 +1,43 @@
+:host {
+	
+}
+.wrapperlabel {
+	box-sizing:border-box;
+	padding:calc(2 * var(--border-width));
+	display:block;
+	width:40px;
+	height:40px;
+	background-color:var(--col-bg);
+	border-image: var(--bi-outset);
+	border-width: var(--border-width);
+	border-style: solid; /* todo chrome bug? */
+	position:relative;
+}
+
+.wrapperlabel:has(.input:active) {
+	background-color:var(--col-pressed);
+	border-image: var(--bi-inset);
+	border-width: var(--border-width);
+
+}
+.wrapper2 {
+	position:absolute;
+	top:calc(2 * var(--border-width));
+	bottom:calc(2 * var(--border-width));
+	left:calc(2 * var(--border-width));
+	right:calc(2 * var(--border-width));
+	overflow:hidden;
+}
+.input {
+	appearance:none;
+	margin:0;
+	padding:0;
+    position: absolute;
+    left: -50%;
+    top: -50%;
+    width: 200%;
+    height: 200%;
+}
+.input:active {
+	
+}

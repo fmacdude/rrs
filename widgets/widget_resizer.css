@@ -1,0 +1,11 @@
+:host {
+	
+}
+.thumb {
+	height:100%; /*?*/
+	width:100%; /*?*/
+	background-image:url("data:image/webp;base64,UklGRmQAAABXRUJQVlA4TFcAAAAvH8AHEBcw//M//2MagAcHbRsJ0t3/IBgEhVNYP9zfHCL6TzZpk3b2kOd/PwqVFnqgDzrQhV7ogT7oQBd6oQf6oANd6IUe6IMOdKEXeqAPOtCFXugphw4A");
+	cursor: nwse-resize;
+	background-position:50% 50%;
+	background-repeat:no-repeat;
+}

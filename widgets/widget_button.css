@@ -1,0 +1,17 @@
+:host {
+}
+.button {
+	width:100px;
+	height:35px;
+	box-sizing:border-box;
+	font-family:var(--font-family);
+	font-size:var(--font-size);
+	color:var(--font-color);
+	background-color:var(--col-bg);
+	border-width: var(--border-width);
+	border-image: var(--bi-outset);
+}
+.button:active, .button.pressed {
+	background-color:var(--col-pressed);
+	border-image: var(--bi-inset);
+}

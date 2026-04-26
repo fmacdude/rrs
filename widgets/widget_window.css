@@ -1,0 +1,168 @@
+
+:host {
+	position:fixed;
+	background:var(--col-bg);
+	border-width: var(--border-width);
+	border-image: var(--bi-outset);
+	border-style: solid; /* todo: check if fixed in newer chrome version. chrome doesn't seem to display border image if border-style is not set */
+	box-sizing:border-box;
+	padding:calc(var(--window-border-width) - var(--border-width));
+	/*slow...
+	  box-shadow:4px 4px 13px rgba(0,0,0,0.25);*/
+	/*fast... but can't resize by dragging borders when cursor is positioned slightly outside the window border
+	  contain:strict;*/
+}
+.titlebar {
+	height: var(--titlebar-height);
+	background: var(--titlebar-bg);
+	color: var(--titlebar-font-col);
+	display:flex;
+	align-items:center;
+	position:relative;
+	padding:
+		0
+		calc(calc(var(--titlebar-height) - var(--titlebar-button-height)) / 2) /* note: also set in code, below... need to change in both places */
+		0
+		calc(calc(var(--titlebar-height) - var(--titlebar-icon-height)) / 2);
+}
+.titlebar-icon {
+	flex-grow:0;
+	flex-shrink:0;
+	width: var(--titlebar-icon-height);
+	height: var(--titlebar-icon-height);
+}
+.titlebar-title {
+	margin:0 4px 0 calc(calc(var(--titlebar-height) - var(--titlebar-icon-height)) / 2);
+	width:100%;
+	min-width: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.titlebar-minimize, .titlebar-maximize, .titlebar-close {
+	flex-grow:0;
+	flex-shrink:0;
+	width:var(--titlebar-button-height);
+	height:var(--titlebar-button-height);
+	background-color:var(--col-bg);
+	line-height:var(--titlebar-button-height);
+	color:black;
+	text-align:center;
+	box-sizing: border-box;
+	border-width: var(--border-width);
+	border-image: var(--bi-outset);
+	padding:0;
+	background-size: 62% 62%;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+}
+.titlebar-minimize {
+	background-image: url('data:image/webp;base64,UklGRiQAAABXRUJQVlA4TBgAAAAvF8AFEA8QEfMfQiCQ7C8dwAIR/c9WAAA=');
+}
+.titlebar-maximize {
+	background-image: url('data:image/webp;base64,UklGRiwAAABXRUJQVlA4TCAAAAAvF8AFEA8QEfMfQjEANFAG+Vtm0O/YCCL6PwGOCT1zDA==');
+}
+.titlebar-maximize.restore {
+	background-image: url('data:image/webp;base64,UklGRjQAAABXRUJQVlA4TCgAAAAvF8AFEA8QEfMfQkEkqQ1FAP7dIIkkAnpOQ0T/Q+akqHfOAZETneck');
+}
+.titlebar-close {
+	background-image: url('data:image/webp;base64,UklGRmAAAABXRUJQVlA4TFMAAAAvF8AFEA8QEfMfwm1t20p0cJcCrAVCIn5buHTGzDRCRko4/tqI6H8AIVVBq/jOzF/UcyuvR3Kczi7GKhoCMwiraLsYx+lcj+S5lV/UzNwwZtQuKQA=');
+}
+
+.titlebar-minimize:active:not(.disabled), .titlebar-maximize:active:not(.disabled), .titlebar-close:active:not(.disabled) {
+	border-image: var(--bi-inset);
+	background-color:var(--col-pressed);
+	padding-top:2px;
+	padding-left:2px;
+}
+.titlebar-minimize.disabled, .titlebar-maximize.disabled, .titlebar-close.disabled {
+	filter: saturate(0) contrast(0.5) brightness(1.5) contrast(0.5);
+}
+.content {
+	position:absolute;
+	top:calc(var(--titlebar-height) + var(--window-border-width) - var(--border-width));
+	left:calc(var(--window-border-width) - var(--border-width));
+	right:calc(var(--window-border-width) - var(--border-width));
+	bottom:calc(var(--window-border-width) - var(--border-width));
+	overflow:hidden;
+	contain:strict;
+	display:flex;
+	flex-direction:column;
+	box-sizing:border-box; /* needed? does it affect absolute-positioned child elements? */
+	background:var(--col-bg);
+}
+.mouseblock {
+	position:absolute;
+	z-index:1;
+	top:calc(var(--titlebar-height) + var(--window-border-width) - var(--border-width));
+	left:calc(var(--window-border-width) - var(--border-width));
+	right:calc(var(--window-border-width) - var(--border-width));
+	bottom:calc(var(--window-border-width) - var(--border-width));
+	pointer-events:none;
+}
+.modalfreeze {
+	position:absolute;
+	z-index:1;
+	display:none;
+	inset:calc(-1 * var(--border-width));
+	background-color:rgba(0,0,0,0.25);
+}
+#tl, #t, #tr, #r, #br, #b, #bl, #l {
+	position:absolute;
+}
+#tl {
+	top: calc(-1 * var(--window-resize-extend) + calc(var(--window-border-width) - var(--border-width)));
+	left: calc(-1 * var(--window-resize-extend) + calc(var(--window-border-width) - var(--border-width)));
+	width: calc(20px + var(--window-resize-extend));
+	height: calc(20px + var(--window-resize-extend));
+	cursor: nwse-resize;
+}
+#t {
+	top: calc(-1 * var(--window-resize-extend) + calc(var(--window-border-width) - var(--border-width)));
+	left: calc(20px + calc(var(--window-border-width) - var(--border-width)));
+	right: calc(20px + calc(var(--window-border-width) - var(--border-width)));
+	height: var(--window-resize-extend);
+	cursor: ns-resize;
+}
+#tr {
+	top: calc(-1 * var(--window-resize-extend) + calc(var(--window-border-width) - var(--border-width)));
+	right: calc(-1 * var(--window-resize-extend) + calc(var(--window-border-width) - var(--border-width)));
+	width: calc(20px + var(--window-resize-extend));
+	height: calc(20px + var(--window-resize-extend));
+	cursor: nesw-resize;
+}
+#r {
+	right: calc(-1 * var(--window-resize-extend) + calc(var(--window-border-width) - var(--border-width)));
+	top: calc(20px + calc(var(--window-border-width) - var(--border-width)));
+	bottom: calc(20px + calc(var(--window-border-width) - var(--border-width)));
+	width: var(--window-resize-extend);
+	cursor: ew-resize;
+}
+#br {
+	bottom: calc(-1 * var(--window-resize-extend) + calc(var(--window-border-width) - var(--border-width)));
+	right: calc(-1 * var(--window-resize-extend) + calc(var(--window-border-width) - var(--border-width)));
+	width: calc(20px + var(--window-resize-extend));
+	height: calc(20px + var(--window-resize-extend));
+	cursor: nwse-resize;
+}
+#b {
+	bottom: calc(-1 * var(--window-resize-extend) + calc(var(--window-border-width) - var(--border-width)));
+	left: calc(20px + calc(var(--window-border-width) - var(--border-width)));
+	right: calc(20px + calc(var(--window-border-width) - var(--border-width)));
+	height: var(--window-resize-extend);
+	cursor: ns-resize;
+}
+#bl {
+	bottom: calc(-1 * var(--window-resize-extend) + calc(var(--window-border-width) - var(--border-width)));
+	left: calc(-1 * var(--window-resize-extend) + calc(var(--window-border-width) - var(--border-width)));
+	width: calc(20px + var(--window-resize-extend));
+	height: calc(20px + var(--window-resize-extend));
+	cursor: nesw-resize;
+}
+#l {
+	left: calc(-1 * var(--window-resize-extend) + calc(var(--window-border-width) - var(--border-width)));
+	top: calc(20px + calc(var(--window-border-width) - var(--border-width)));
+	bottom: calc(20px + calc(var(--window-border-width) - var(--border-width)));
+	width: var(--window-resize-extend);
+	cursor: ew-resize;
+}

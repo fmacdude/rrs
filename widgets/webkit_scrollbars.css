@@ -1,0 +1,84 @@
+::-webkit-scrollbar  {
+	width: var(--webkit-scrollbar-width);
+	height: var(--webkit-scrollbar-width);
+}
+::-webkit-scrollbar-button {
+	width: var(--webkit-scrollbar-width);
+	height: var(--webkit-scrollbar-width);
+	
+	border-width: var(--border-width);
+	border-image: var(--bi-outset);
+	border-style: solid; /* chrome doesn't seem to use border image unless border-style specified */
+	
+	background-color: var(--col-bg);
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+::-webkit-scrollbar-button:active {
+	background-color: var(--col-pressed);
+	
+	border-image: var(--bi-inset);
+}
+/* todo polish the scrollbar button arrow bitmaps, add alpha channel for disabled ones? */
+:disabled ::-webkit-scrollbar-button:horizontal:increment {
+	background-image:url('data:image/webp;base64,UklGRjAAAABXRUJQVlA4TCMAAAAvC8ACEFUoaNuGQTuOQ/gYpEpE/yeA1+pRHMVRnMhABjKUbwA=');
+}
+:disabled ::-webkit-scrollbar-button:horizontal:decrement {
+	background-image:url('data:image/webp;base64,UklGRjAAAABXRUJQVlA4TCMAAAAvC8ACEDUYiCQj7XfUz3g0uI/o/wTwLUfUJEdWLGIRi1h4HQA=');
+}
+:disabled ::-webkit-scrollbar-button:vertical:increment {
+	background-image:url('data:image/webp;base64,UklGRjIAAABXRUJQVlA4TCYAAAAvC8ACEDUoaNuGQTuO4/cPgSyi/woCAkDEGS4Urxofd/lDdhJrAg==');
+}
+:disabled ::-webkit-scrollbar-button:vertical:decrement {
+	background-image:url('data:image/webp;base64,UklGRjAAAABXRUJQVlA4TCQAAAAvC8ACEIWCtm2kkA3H8tt2L4GI+Z8A/OlcsJ2DazbuE0Au4k0=');
+}
+::-webkit-scrollbar-thumb {
+	background-color: var(--col-bg);
+	border-width: var(--border-width);
+	border-image: var(--bi-outset);
+	border-style: solid; /* chrome doesn't seem to use border image unless border-style specified */
+}
+::-webkit-scrollbar-track {
+	background-color:var(--col-pressed);
+}
+::-webkit-scrollbar-track-piece {
+	
+}
+::-webkit-scrollbar-track-piece:active {
+	background-color:white;
+}
+::-webkit-scrollbar-corner {
+	background-color:var(--col-bg);
+}
+::-webkit-scrollbar-resizer {
+	
+}
+::-webkit-scrollbar-button:active {
+	background-position: calc(50% + 2px) calc(50% + 2px);
+}
+
+::-webkit-scrollbar-button:horizontal:decrement {
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAQAAAD8fJRsAAAAHklEQVQY02NgoBT8xyX8H5fwf1zCpOjAYwceV1EEAAO2D/HsQ4vsAAAAAElFTkSuQmCC");
+}
+::-webkit-scrollbar-button:horizontal:increment {
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAQAAAD8fJRsAAAAHUlEQVQY02NgIB/8xy3xH7fEf9wS/0nUQZqrKAYAK44P8ZRmzLQAAAAASUVORK5CYII=");
+}
+::-webkit-scrollbar-button:horizontal:increment:start {
+	display: none;
+}
+::-webkit-scrollbar-button:horizontal:decrement:end {
+	display: none;
+}
+
+::-webkit-scrollbar-button:vertical:decrement {
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAGklEQVR4AWMYxuA/SYphmETFhDX9x4mHGQAAcL4P8dQiMq8AAAAASUVORK5CYII=");
+}
+::-webkit-scrollbar-button:vertical:increment {
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAQAAAD8fJRsAAAAF0lEQVQY02NgoBf4jwJxSOHQhcNAOgMAWWAP8Rv2U3UAAAAASUVORK5CYII=");
+}
+::-webkit-scrollbar-button:vertical:increment:start {
+	display: none;
+}
+::-webkit-scrollbar-button:vertical:decrement:end {
+	display: none;
+}

@@ -1,0 +1,50 @@
+:host {
+	--height:calc(1.8 * var(--font-size));
+	position:relative;
+}
+.label {
+	position:relative;
+	display:block;
+}
+.select {
+	border:none;
+	width:100%;
+	height:var(--height);
+	font-family:var(--font-family);
+	font-size:var(--font-size);
+	color:var(--font-color);
+	background:var(--col-white);
+    padding-left:5px;
+	border-right:var(--height) solid white; /* color doesn't matter as will be overlaid with dropdown arrow */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+/*.select:active {
+	background:var(--col-select);
+	color:var(--col-select-text);
+}
+option {
+	background:var(--col-white);
+	color:var(--font-color);
+}*/
+.label:after {
+	display:block;
+	position:absolute;
+	content:'';
+	top:0;
+	bottom:0;
+	right:0;
+	box-sizing:border-box;
+	width:var(--height);
+	background:var(--col-bg);
+	border-image: var(--bi-outset);
+	border-width: var(--border-width);
+	border-style: solid; /* todo chrome bug? */
+	pointer-events:none;
+	background:var(--col-bg) url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAQAAAD8fJRsAAAAF0lEQVQY02NgoBf4jwJxSOHQhcNAOgMAWWAP8Rv2U3UAAAAASUVORK5CYII=") 50% 50% no-repeat;
+}
+.label:has(.select:active):after {
+	border-image: var(--bi-inset);
+	background-color:var(--col-pressed);
+}

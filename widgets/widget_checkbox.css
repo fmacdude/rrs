@@ -1,0 +1,33 @@
+:host {
+	cursor:pointer;
+}
+.checkbox {
+	margin:0;
+	display:block;
+	width:23px;
+	height:23px;
+	box-sizing:border-box;
+	color:var(--font-color);
+	background-color:var(--col-white);
+	border-image: var(--bi-cutout);
+	border-width: var(--border-width);
+	border-style: solid; /* todo chrome bug? */
+	appearance:none;
+	position:relative;
+}
+.checkbox:checked:after {
+	display:block;
+	content:'';
+	position:absolute;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	background-color:var(--font-color);
+	mask-image:url("data:image/webp;base64,UklGRq4AAABXRUJQVlA4TKEAAAAvH8AHELegoG0bKdl7d/whHGi1jSS1wfc+fSCFYdtIioM3c8wM//MfgPD/CIJEsiJRugWCCBCJBEJPFqqIAJIIVcHZ670fCGlGmAXGbSQp6t7dY8b8g13qw29E/xW5bdvY4TUdz8CPdzrF1OShImWc8lN56ptVlxpVpFORRjHQ6y5sa/1ZhYN6f+Yy/9TFC5X/XlXAFpFfLwWUWhXQdPjeAgA=");
+	mask-size:100%;
+	mask-position:50% 50%;
+}
+.checkbox:active {
+	background-color:var(--col-bg);
+}

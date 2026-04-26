@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=6, user-scalable=yes" />
+		<title>WEBC</title>
+		<link rel="stylesheet" type="text/css" href="widgets/common_style.css" />
+		<link rel="icon" type="image/x-icon" href="/icons/icon (59).webp">
+	</head>
+	<body>
+		<div class="desktop-pane"></div>
+		<div class="windows-pane"></div>
+		<div class="taskbar-pane">
+			<ui-taskbar id="taskbar"></ui-taskbar>
+		</div>
+		<menu-pane class="menus-pane"></menu-pane>
+		<div class="cursor-pane"></div>
+		
+		<script type="comment">
+		//todo:
+		// -  3 - menu submenu open delay
+		//		- menu scrolling for too long menus that dont fit on screen, or display items side by side
+		// -  8 - improve toolbar css / functionality
+		// -  3 - worker to main thread messaging
+		// -  2 - worker API
+		//			events
+		// -    - window manager:
+		// 				merge window class into window widget class
+		//				taskbar - allow minimized windows to be maximized from context menu
+		//				change "maximize" to "restore" in appropriate titlebar icons / context menus
+		//				don't allow window to snap to outside screen along screen edge
+		//				show "show all windows" menu button on taskbar when taskbar window switcher full
+		//				titlebar button icons
+		//				forget restored size when resizing away from filling half/quarter of screen
+		//				don't horizontally shift window a lot when dragging titlebar of windows filling half/quarter of screen
+		//				clean up snapping code
+		//				add per-window resizable, min-size options
+		//				initial window position on screen - remember per app? choose randomly?
+		//				double-click titlebar to maximize/restore
+		//				taskbar - different style for minimized windows
+		//				snap to fill screen vertically when resizing up/down (needed?)
+		//				add "centre on screen" option to taskbar context menu, or don't allow windows to be moved offscreen (eg when browser resized)
+		//				modal windows/dialogs
+		//				group windows in taskbar by proceess / by app
+		//				focus all windows of process/app when focusing one window (configurable per app?)
+		//				alt-tab style switcher (? not sure if can capture keyboard and prevent from going to host OS)
+		//				show desktop function (minimize/restore all windows, forget saved windows to restore if open new window or restore window from taskbar
+		//				show tentative new outline frame of window when dragging to edge of screen to be maximized / fill half or quarter of screen
+		// -  4 - more widgets - textarea, ...
+		// - 10 - list view
+		// -  5 - demo apps
+		// - 20 - packaging / minimization
+		// - 15 - app packaging / distribution format
+		// - 20 - filesystem
+		// - 20 - drag and drop from app to app
+		// - 10 - desktop icons
+		// - 40 - file manager
+		// - 10 - drag to/from host OS
+		// - 10 - file picker dialog
+		// -  5 - color picker dialog
+		// - 20 - date/time picker
+		// - 10 - theming/settings
+		// - 10 - system info
+		// - 20 - configurable taskbar / title bar
+		</script>
+		
+		<!-- main thread code... -->
+		<script type="text/javascript" src="os/util.js"></script>
+		<script type="text/javascript" src="os/ui.js"></script>
+		<script type="text/javascript" src="widgets/widget_base.js"></script>
+		<script type="text/javascript" src="os/os.js"></script>
+		<script type="text/javascript" src="os/container.js"></script>
+		<script type="text/javascript" src="os/wm.js"></script>
+		<script type="text/javascript" src="os/workercom.js"></script>
+		<script type="text/javascript" src="os/process.js"></script>
+		
+		<!-- worker thread code library (prepended to each worker script) --
+		<script id="workerLib" type="workerjs"></script> -->
+		
+		<!-- webkit scrollbar styling -->
+		<template id="webkit-scrollbar-style-template">
+			<link rel="stylesheet" type="text/css" href="widgets/webkit_scrollbars.css" />
+		</template>
+		
+		<!-- taskbar -->
+		<template id="taskbar-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_taskbar.css" />
+			<button class="launchermenu">Launch</button>
+			<div class="windowswitcher"></div>
+			<div class="tray">
+				<img draggable="false" />
+				<img draggable="false" />
+				<img draggable="false" />
+				<span class="clock"></span>
+			</div>
+		</template>
+		<script type="text/javascript" src="widgets/widget_taskbar.js"></script>
+		
+		<!-- window -->
+		<template id="window-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_window.css" />
+			<div id="tl"></div>
+			<div id="t"></div>
+			<div id="tr"></div>
+			<div id="r"></div>
+			<div id="br"></div>
+			<div id="b"></div>
+			<div id="bl"></div>
+			<div id="l"></div>
+			<div class="titlebar">
+				<img src="" class="titlebar-icon" draggable="false" />
+				<div class="titlebar-title"></div>
+				<button class="titlebar-minimize"></button>
+				<button class="titlebar-maximize"></button>
+				<button class="titlebar-close"></button>
+			</div>
+			<div class="content"></div>
+			<div class="mouseblock"></div>
+			<div class="modalfreeze"></div>
+		</template>
+		<script type="text/javascript" src="widgets/widget_window.js"></script>
+		
+		<!-- menu pane for context menus / menu bar menus / menu button menus / etc... -->
+		<template id="menupane-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_menupane.css" />
+		</template>
+		<script type="text/javascript" src="widgets/widget_menupane.js"></script>
+		
+		<!-- menu bar -->
+		<template id="menubar-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_menubar.css" />
+		</template>
+		<script type="text/javascript" src="widgets/widget_menubar.js"></script>
+		
+		<!-- split pane -->
+		<template id="splitpane-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_splitpane.css" />
+			<div class="pane1">
+				<div class="pane1-container"></div>
+			</div>
+			<div class="separator"></div>
+			<div class="pane2">
+				<div class="pane2-container"></div>
+			</div>
+		</template>
+		<script type="text/javascript" src="widgets/widget_splitpane.js"></script>
+		
+		<!-- tool bar -->
+		<template id="toolbar-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_toolbar.css" />
+			<div class="bar">
+				<button class="button extra"></button>
+			</div>
+		</template>
+		<script type="text/javascript" src="widgets/widget_toolbar.js"></script>
+		
+		<!-- color buttons -->
+		<template id="colorbuttons-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_colorbuttons.css" />
+			<div>Choose a color:</div>
+		</template>
+		<script type="text/javascript" src="widgets/widget_colorbuttons.js"></script>
+		
+		<!-- tabs -->
+		<template id="tabs-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_tabs.css" />
+			<div class="tabs single"></div>
+		</template>
+		<script type="text/javascript" src="widgets/widget_tabs.js"></script>
+		
+		<!-- treeview -->
+		<template id="treeview-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_treeview.css" />
+		</template>
+		<script type="text/javascript" src="widgets/widget_treeview.js"></script>
+		
+		<!-- dropdown -->
+		<template id="dropdown-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_dropdown.css" />
+		</template>
+		<script type="text/javascript" src="widgets/widget_dropdown.js"></script>
+		
+		<!-- listview -->
+		<template id="listview-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_listview.css" />
+		</template>
+		<script type="text/javascript" src="widgets/widget_listview.js"></script>
+
+		<!-- iconview -->
+		<template id="iconview-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_iconview.css" />
+		</template>
+		<script type="text/javascript" src="widgets/widget_iconview.js"></script>
+		
+		<!-- uibutton -->
+		<template id="uibutton-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_button.css" />
+		</template>
+		<script type="text/javascript" src="widgets/widget_button.js"></script>
+		
+		<!-- container -->
+		<template id="container-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_container.css" />
+		</template>
+		<script type="text/javascript" src="widgets/widget_container.js"></script>
+		
+		<!-- label -->
+		<template id="uilabel-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_label.css" />
+		</template>
+		<script type="text/javascript" src="widgets/widget_label.js"></script>
+		
+		<!-- checkbox -->
+		<template id="uicheckbox-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_checkbox.css" />
+		</template>
+		<script type="text/javascript" src="widgets/widget_checkbox.js"></script>
+		
+		<!-- textinput -->
+		<template id="textinput-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_textinput.css" />
+		</template>
+		<script type="text/javascript" src="widgets/widget_textinput.js"></script>
+		
+		<!-- uicanvas -->
+		<template id="uicanvas-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_canvas.css" />
+		</template>
+		<script type="text/javascript" src="widgets/widget_canvas.js"></script>
+		
+		<!-- colorinput -->
+		<template id="colorinput-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_colorinput.css" />
+		</template>
+		<script type="text/javascript" src="widgets/widget_colorinput.js"></script>
+		
+		<!-- resizer -->
+		<template id="resizer-template">
+			<link rel="stylesheet" type="text/css" href="widgets/widget_resizer.css" />
+		</template>
+		<script type="text/javascript" src="widgets/widget_resizer.js"></script>
+		
+	</body>
+</html>

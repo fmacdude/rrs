@@ -1,0 +1,10 @@
+:host {
+	position:relative;
+}
+.container {
+	position:relative;
+	display:flex;
+	flex-direction:column;
+	overflow:hidden;
+	box-sizing:border-box;
+}

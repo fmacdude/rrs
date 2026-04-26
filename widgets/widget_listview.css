@@ -1,0 +1,21 @@
+:host {
+	position:relative;
+	background-color:var(--col-white);
+	overflow:auto;
+	padding:4px;
+}
+.container {
+	position:relative;
+}
+.item {
+	white-space:nowrap;
+	position:relative;
+	line-height:24px;
+	height:24px;
+	position:relative;
+	padding-left:5px;
+}
+.item.selected {
+	background-color:var(--col-select);
+	color:var(--col-select-text);
+}

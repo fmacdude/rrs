@@ -1,0 +1,197 @@
+:host {
+	--padding: 3px;
+	--text: 16px;
+	--fs: 14px;
+	--icon-small: 24px;
+	--icon-large: 40px;
+}
+.bar {
+	background:var(--col-bg);
+	color:black;
+	position:relative;
+	display:flex;
+	flex-direction:row;
+	overflow:hidden;
+	align-content:flex-start;
+}
+.bar.wrap {
+	flex-wrap:wrap;
+}
+.bar.vertical {
+	flex-direction:column;
+	height:100%;
+}
+.button, .separator {
+	align-self:center;
+	flex-shrink:0;
+	position:relative;
+}
+.bar.vertical.text-beside .button {
+	align-self:stretch;
+	text-align:left;
+}
+.separator {
+	width:0;
+	border-style:solid; /*todo needed because chrome bug? */
+	border-width: calc(var(--border-width) / 1.5);
+	border-image: var(--border-image-cutout) var(--border-image-slice) / 0 calc(var(--border-width) / 1.5) 0 calc(var(--border-width) / 1.5);
+}
+.bar.vertical .separator {
+	width:unset;
+	height:0 !important;
+	border-image: var(--border-image-cutout) var(--border-image-slice) / calc(var(--border-width) / 1.5) 0 calc(var(--border-width) / 1.5) 0;
+}
+.bar.vertical.small-icons {
+	min-width:calc(var(--border-width) + var(--padding) + var(--icon-small) + var(--padding) + var(--border-width));
+}
+.bar.vertical.large-icons {
+	min-width:calc(var(--border-width) + var(--padding) + var(--icon-small) + var(--padding) + var(--border-width));
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+.bar.vertical .break {
+  width: 0;
+  height: auto;
+}
+
+.button {
+	font-family:var(--font-family);
+	color:var(--font-color);
+	font-size:var(--font-size);
+	line-height:var(--text);
+	text-align:center;
+	white-space:nowrap;
+	text-overflow: ellipsis;
+	overflow:hidden;
+	padding: var(--padding);
+	border: var(--border-width) solid var(--col-bg);
+	background-repeat:no-repeat;
+	box-sizing:unset;
+	background-color:var(--col-bg);
+}
+.button:hover {
+	border-image: var(--bi-outset);
+}
+.button:active, .button.pressed {
+	border-image: var(--bi-inset);
+	background-color:var(--col-pressed);
+}
+.button.disabled {
+	color:black;
+	border:var(--border-width) solid transparent !important;
+	filter: saturate(0) contrast(0.5) brightness(1.5) contrast(0.5);
+	background-color:transparent !important;
+}
+.bar.small-icons .separator {
+	height:var(--icon-small);
+	margin:0 var(--padding);
+}
+.bar.large-icons .separator {
+	height:var(--icon-large);
+	margin:0 calc(2 * var(--padding));
+}
+.bar.text-under .separator {
+}
+
+.bar.small-icons.vertical .separator {
+	width:var(--icon-small);
+	margin:var(--padding) 0;
+}
+.bar.large-icons.vertical .separator {
+	width:var(--icon-large);
+	margin:calc(2 * var(--padding)) 0;
+}
+.bar.text-beside.vertical .separator {
+}
+
+.bar.large-icons .button {
+	background-size: var(--icon-large);
+}
+.bar.small-icons .button {
+	background-size: var(--icon-small);
+}
+.bar.text-beside .button {
+}
+.bar.text-under .button {
+	height: var(--text);
+	background-position: 50% var(--padding);
+}
+.bar.text-none .button {
+	font-size:0;
+	background-position:50% 50%;
+}
+.bar.small-icons.text-none .button {
+	width: var(--icon-small);
+	height: var(--icon-small);
+}
+.bar.small-icons.text-under .button {
+	padding-top: calc(var(--padding) + var(--icon-small) + var(--padding));
+	width: calc(var(--icon-small) + var(--padding) + var(--text));
+}
+.bar.small-icons.text-beside .button {
+	padding-left: calc(calc(2 * var(--padding)) + var(--icon-small));
+	padding-right: calc(3 * var(--padding));
+	height: var(--icon-small);
+	line-height: var(--icon-small);
+	background-position: var(--padding) 50%;
+}
+.bar.large-icons.text-none .button {
+	width: var(--icon-large);
+	height: var(--icon-large);
+}
+.bar.large-icons.text-under .button {
+	padding-top: calc(var(--padding) + var(--icon-large) + var(--padding));
+	width: calc(var(--icon-large) + var(--padding) + var(--text));
+}
+.bar.large-icons.text-beside .button {
+	padding-left: calc(calc(2 * var(--padding)) + var(--icon-large));
+	padding-right: calc(4 * var(--padding));
+	height: var(--icon-large);
+	line-height: var(--icon-large);
+	background-position: var(--padding) 50%;
+}
+.extra {
+	display:none !important;
+	background-image: url(data:image/webp;base64,UklGRmIAAABXRUJQVlA4TFYAAAAvH8AHEA8QEfMfglFsW20ufQcScIKykkj7UpDAknV6HET0X23bNow3O015w+4QRZGHoUig7olFZqrCMBUJiz3NH2CnTnO2nItOtpPxZD2Yvy++/Gp3AA==) !important;
+	background-position:50% 50% !important;
+	position:absolute;
+}
+.bar.overflow .extra {
+	display:unset !important;
+}
+.bar.horizontal .extra {
+	right:0;
+	top:0;
+}
+.bar.vertical .extra {
+	bottom:0;
+	left:0;
+	right:0;
+}
+.bar.small-icons.horizontal .extra {
+	width: calc(var(--icon-small) / 1.5) !important;
+	background-size:calc(var(--icon-small) / 1.5) !important;
+	padding-left:var(--padding) !important;
+	padding-right:var(--padding) !important;
+}
+.bar.small-icons.vertical .extra {
+	height: calc(var(--icon-small) / 1.5) !important;
+	background-size:calc(var(--icon-small) / 1.5) !important;
+	padding-top:var(--padding) !important;
+	padding-bottom:var(--padding) !important;
+}
+.bar.large-icons.horizontal .extra {
+	width: calc(var(--icon-large) / 2) !important;
+	background-size:calc(var(--icon-large) / 2.5) !important;
+	padding-left:var(--padding) !important;
+	padding-right:var(--padding) !important;
+}
+.bar.large-icons.vertical .extra {
+	height: calc(var(--icon-large) / 2) !important;
+	background-size:calc(var(--icon-large) / 2.5) !important;
+	padding-top:var(--padding) !important;
+	padding-bottom:var(--padding) !important;
+}

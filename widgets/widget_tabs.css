@@ -1,0 +1,72 @@
+:host {
+	display:flex;
+	flex-direction:column;
+}
+.tabs {
+	display:flex;
+	overflow-x:clip;
+	padding:0 6px 0 3px;
+}
+.tabs.selected {
+	order:1;
+	z-index:2;
+}
+.tabs.single {
+	padding-top:var(--border-width);
+}
+.tabs.single .tab {
+	flex-grow:0;
+}
+.tab {
+	text-align:center;
+	flex-shrink:0;
+	flex-grow:1;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow: ellipsis;
+	position:relative;
+	z-index:0;
+	padding:5px 10px;
+	margin-right:calc(-1 * var(--border-width));
+	background-color: var(--col-bg);
+	border-style:solid;/* chrome bug? */
+	border-image: var(--border-image-tab) var(--border-image-slice) / var(--border-width) var(--border-width) 0 var(--border-width);
+	border-width: var(--border-width);
+	border-bottom-width: 0;
+	background-clip:padding-box;
+}
+.tabs.selected .tab {
+	
+}
+.tab.selected {
+	position:relative;
+	left: -3px;
+	z-index:2;
+	padding-left:13px;
+	padding-right:13px;
+	margin-right:calc(calc(-1 * var(--border-width)) - 6px);
+	
+	border-image: var(--bi-tab);
+	margin-bottom:calc(-1 * var(--border-width));
+	
+	margin-top:calc(-1 * var(--border-width));
+	padding-bottom:8px;
+	border-bottom-width: var(--border-width);
+}
+.tab:not(.selected):hover {
+	background-color: var(--col-pressed);
+}
+.tabcontent {
+	order:2;
+	padding:20px;
+	z-index:1;
+	position:relative;
+	border-width: var(--border-width);
+	border-image: var(--bi-outset);
+	border-style: solid; /* chrome bug? */
+	display:flex;
+	flex-direction:column;
+	box-sizing:border-box;
+	flex-basis:100%;
+	contain:strict;
+}

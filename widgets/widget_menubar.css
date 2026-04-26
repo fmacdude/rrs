@@ -1,0 +1,16 @@
+:host {
+	background:var(--col-bg);
+	display:flow-root;
+	line-height:25px;
+}
+.top {
+	height:25px;
+	position:relative;
+	float:left;
+	padding:0 15px 0 15px;
+	white-space:nowrap;
+}
+.top:hover, .top.selected {
+	background:var(--col-select);
+	color:var(--col-select-text);
+}

@@ -1,0 +1,66 @@
+.menu {
+	position:absolute;
+	border-width: var(--border-width);
+	border-image: var(--bi-outset);
+	border-style: solid;
+	background: var(--col-bg);
+	z-index:1;
+	line-height: var(--menu-item-height);
+}
+.submenu {
+	display:none;
+	position:absolute;
+	right:0;
+	top:0;
+	transform: translate(100%);
+	border-width: var(--border-width);
+	border-image: var(--bi-outset);
+	border-style: solid;
+	color:var(--font-color);
+	background: var(--col-bg);
+}
+.item, .sub {
+	display:block;
+	white-space:nowrap;
+	padding:0 100px 0 calc(1.15 * var(--menu-item-height));
+	height: var(--menu-item-height);
+	position:relative;
+	background: var(--col-bg) calc(0.125 * var(--menu-item-height)) 50%/calc(0.75 * var(--menu-item-height)) no-repeat;
+}
+.sub::before {
+	content:'>';
+	position:absolute;
+	right:10px;
+}
+.item::before {
+	content:attr(data-before);
+	position:absolute;
+	left:10px;
+}
+.item::after {
+	content:attr(data-after);
+	position:absolute;
+	right:15px;
+	text-align:right;
+}
+.item:hover, .sub:hover, .item.selected, .sub.selected {
+	color: var(--col-select-text);
+	background-color: var(--col-select);
+}
+.sub.selected > .submenu {
+	display:inline-block;
+	position:absolute;
+}
+.separator {
+	display:block;
+	margin:calc(2 * var(--border-width)) calc(1.15 * var(--menu-item-height));
+	border-style:solid; /*todo needed because chrome bug? */
+	border-width: calc(var(--border-width) / 1.5);
+	border-image: var(--border-image-cutout) var(--border-image-slice) / calc(var(--border-width) / 1.5) 0 calc(var(--border-width) / 1.5) 0;
+	height:0;
+}
+.disabled {
+	background-color:transparent !important;
+	filter: saturate(0) contrast(0.5) brightness(1.5) contrast(0.5);
+	color:black !important;
+}

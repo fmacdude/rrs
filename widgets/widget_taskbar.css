@@ -1,0 +1,106 @@
+:host {
+	display:flex;
+	position:fixed;
+	bottom:0;
+	left:0;
+	right:0;
+	height: var(--taskbar-item-height);
+	padding: calc(calc(var(--taskbar-height) - var(--taskbar-item-height)) / 2);
+	background:var(--col-bg);
+	border-style:solid; /* chrome bug? */
+	border-width: var(--border-width) 0 0 0;
+	border-image: var(--border-image-outset) var(--border-image-slice) / var(--border-width) 0 0 0;
+}
+.launchermenu {
+	flex-grow:0;
+	flex-shrink:0;
+	border-width: var(--border-width);
+	border-image: var(--bi-outset);
+	font-weight:bold;
+	margin-right:calc(var(--taskbar-height) - var(--taskbar-item-height));
+	padding:0 6px 0 calc(10px + calc(0.75 * var(--taskbar-item-height)));
+	position:relative;
+	font-family:inherit;
+	font-size:inherit;
+	color:inherit;
+	background: var(--col-bg) 5px 50%/calc(0.75 * var(--taskbar-item-height)) no-repeat;
+}
+.launchermenu:after {
+	position:absolute;
+	content:'';
+	top:0;
+	right:0;
+	bottom:-30px; /* todo: calc. maybe add 1px buffer? */
+	left:-30px;
+}
+.launchermenu:active, .launchermenu.pressed {
+	border-image: var(--bi-inset);
+	padding-top:2px;
+	padding-right:4px;
+	padding-left:calc(12px + calc(0.75 * var(--taskbar-item-height)));
+	background-position: 7px calc(50% + 2px);
+	background-color:var(--col-pressed);
+}
+.windowswitcher {
+	flex-grow:1;
+	flex-shrink:1;
+	min-width:0;
+	display:flex;
+	width:100%;
+	overflow-x:clip; /* todo: add menu button showing list of all windows, if taskbar full */
+}
+.window {
+	flex-grow:0;
+	flex-shrink:1;
+	min-width:40px;
+	border-width: var(--border-width);
+	border-image: var(--bi-outset);
+	margin-right:2px;
+	padding:0 2px 0 calc(10px + calc(0.75 * var(--taskbar-item-height)));
+	width:175px;
+	position:relative;
+	white-space:nowrap;
+	overflow-x:clip;
+	text-overflow:ellipsis;
+	text-align:left;
+	font-family:inherit;
+	font-size:inherit;
+	color:inherit;
+	background: var(--col-bg) 5px 50%/calc(0.75 * var(--taskbar-item-height)) no-repeat;
+}
+.window:active, .window.pressed {
+	border-image: var(--bi-inset);
+	padding-top:2px;
+	padding-left:calc(12px + calc(0.75 * var(--taskbar-item-height)));
+	padding-right:0px;
+	background-color:var(--col-pressed);
+	background-position: 7px calc(50% + 2px);
+}
+.window:after {
+	position:absolute;
+	content:'';
+	top:0;
+	right:calc(-1 * var(--border-width));
+	left:calc(-1 * var(--border-width));
+	bottom:-30px; /* todo: calc */
+}
+.tray {
+	flex-grow:0;
+	flex-shrink:0;
+	display:flex;
+	align-items:center;
+	border-width: var(--border-width);
+	border-image: var(--bi-inset);
+	border-style: solid;
+	padding:0 10px;
+	white-space:nowrap;
+	
+}
+img {
+	height:20px;
+	width:20px;
+	vertical-align:middle;
+}
+.clock {
+	padding-left:10px;
+}

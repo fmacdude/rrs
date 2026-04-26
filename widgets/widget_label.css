@@ -1,0 +1,10 @@
+:host {
+	position:relative;
+}
+.label {
+	
+}
+.label::selection {
+	color:var(--col-select-text);
+	background:var(--col-select);
+}
