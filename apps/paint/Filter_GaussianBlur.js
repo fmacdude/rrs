@@ -1,4 +1,4 @@
-import { UI, WindowHandle, ContainerHandle, WidgetHandle, FS } from '/lib/workerlib.js';
+import { UI, WindowHandle, ContainerHandle, WidgetHandle, FS } from '../../lib/workerlib.js';
 import { App } from './app.js';
 import { UndoRedo } from './UndoRedo.js';
 
