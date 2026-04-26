@@ -1,4 +1,4 @@
-import { UI, WindowHandle, ContainerHandle, WidgetHandle } from '/lib/workerlib.js';
+import { UI, WindowHandle, ContainerHandle, WidgetHandle } from '../lib/workerlib.js';
 import { FieldTypeEnum, WidgetDefs, WindowPropsFormDef, IconsFormDef, _widgetLayoutObjectDef, _containerLayoutObjectDef } from './widgetdefs.js';
 import { mainWindowDef } from './designer_main_window_def.js';
 
